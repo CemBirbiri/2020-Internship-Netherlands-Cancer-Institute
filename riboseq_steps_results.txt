@@ -1,0 +1,51 @@
+1.
+
+cutadapt -a AGATCGGAAGAGCACACGTCT -a CTGTAGGCACCATCAATATCTCGTATGCCGTCTTCTGCTTG -o cutadapt_output_plus.fastq MD55A_plus.fastq.gz
+
+2. Filtering out of RRNA and TRNA:
+
+RRNA_REF="/DATA/between_us/diricore_test/project/diricore_genomic_data/human/rRNAs";
+TRNA_REF="/DATA/between_us/diricore_test/project/diricore_genomic_data/human/tRNAs";
+
+
+
+bowtie2 --seed 42 --local --un-gz step2_output.fastq -q cutadapt_output_plus.fastq -x /DATA/between_us/diricore_test/project/diricore_genomic_data/human/rRNAs 
+
+
+where the output.fastq is a clean fastq file I guess.
+
+/DATA/Cem_Internship/ribo_steps1/output/transcript/sample_sorted.bam.0000.bam
+
+
+3.Alignment
+For this purpose, you gave this reference files for alingment:
+
+REF="/DATA/pkoerner/REF/diricore_genomic_data/human/genome";
+GTF="/DATA/pkoerner/REF/diricore_genomic_data/human/transcripts.gff";
+TIDX="/DATA/pkoerner/REF/diricore_genomic_data/human/transcripts"; 
+
+I used bowtie2 and tophat and run this command:
+
+tophat --GTF /DATA/pkoerner/REF/diricore_genomic_data/human/transcripts.gff --transcriptome-index /DATA/pkoerner/REF/diricore_genomic_data/human/transcripts /DATA/pkoerner/REF/diricore_genomic_data/human/genome cutadapt_output_plus.fastq 
+
+
+
+4) Data conversion for Quality Control
+
+Take the clean fastq files and align them to the transcriptome only.
+
+/DATA/REFERENCE/gencode.v19.pc_transcripts.fa
+
+the result should be a sam file.
+
+bowtie --sam /DATA/REFERENCE/gencode.v19.pc_transcripts.fa cutadapt_output_plus.fastq step4_output.sam
+
+bowtie --sam -q cutadapt_output_plus.fastq /DATA/REFERENCE/gencode.v19.pc_transcripts.fa
+
+
+6)
+samtools depth sample_sorted.bam.0000.bam | perl -ne 'BEGIN{ print "track type= print wiggle_0 \ name=fileName description=fileName\n"}; ($c, $start, $depth) = split;  if ($c ne $lastC) { print "variableStep chrom=$c span=10\n"; };$lastC=$c;  next unless $. % 10 ==0;print "$start\t$depth\n" unless $depth<3' > xxxxx.wig
+
+
+
+
