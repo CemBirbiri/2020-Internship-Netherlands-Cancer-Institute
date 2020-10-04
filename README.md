@@ -1,5 +1,5 @@
 # Internship--Netherlands-Cancer-Institute
-Summer Internship (July-1-2020 / October-1-2020)
+2020 Summer Internship (July-1-2020 / October-1-2020)
 
 Ribosome profiling is a deep-sequencing-based technique where the detailed analysis 
 of the translation can be observed in vivo. In this work, two datasets of ribosome profiling data
