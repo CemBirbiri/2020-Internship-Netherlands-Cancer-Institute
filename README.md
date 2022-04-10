@@ -1,5 +1,7 @@
-# Internship--Netherlands-Cancer-Institute
-2020 Summer Internship (July-1-2020 / October-1-2020)
+# Internship-Netherlands-Cancer-Institute
+
+This repository involves the code of my 2020 summer internship at Netherlands Cancer Institute.
+The project is about analysing the ribosome profiling data of skin cancer cells and apply Machine Learning algorithms to classifiy disorderedness levels.
 
 Ribosome profiling is a deep-sequencing-based technique where the detailed analysis 
 of the translation can be observed in vivo. In this work, two datasets of ribosome profiling data
